@@ -1,7 +1,9 @@
-VERSION = 3.5
+# import streamlit as st
+from function import connect_db, display_info
+from dbinfo import *
+import pyodbc
 
-def print_version_info():
-    print(f"version number == {VERSION}.")
+if __name__ == "__main__":
+    engine = connect_db(drivername, host, database, query)
+    display_info(engine)
     
-if __name__ == '__main__':
-    print_version_info()
