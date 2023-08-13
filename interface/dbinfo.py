@@ -15,6 +15,6 @@ host = "192.168.0.2"
 database = "trade_network_db"
 port = 49172
 username = 'defaultuser' 
-password = 'user123'
+password = '*******'
 query = {"trusted_connection":"No",
          "driver":"SQL Server"}

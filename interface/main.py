@@ -1,7 +1,6 @@
 # import streamlit as st
 from function import connect_remote, display_info
 from dbinfo import drivername, username, password, host, port, database, query
-import pyodbc
 
 if __name__ == '__main__':
     engine = connect_remote(drivername, username, password, host, port, database, query)
