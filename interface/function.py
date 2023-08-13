@@ -1,27 +1,29 @@
-"""
-Functions to be used in main.py
-"""
-from sqlalchemy import URL
 from sqlalchemy import create_engine
-from sqlalchemy import Text
+from sqlalchemy.engine.url import URL  # Import URL from the engine submodule
+from sqlalchemy import text
+
 
 def connect_db(drivername, host, database, query):
     """
     pass
     """
-    url = URL.create(drivername=drivername,
-                     host=host,
-                     database=database,
-                     query=query)
+    try:
+        url = URL.create(drivername=drivername,
+                        host=host,
+                        database=database,
+                        query=query)
 
 
-    engine = create_engine(url)
-    return engine
-
+        engine = create_engine(url)
+        return engine
+    except:
+        raise ValueError("Engine object could not be created")
 
 def display_info(engine):
     """
     pass
     """
     with engine.connect() as conn:
-        print(conn.execute(Text("SELECT CURRENT_USER;")).all())
+        sql = text("SELECT CURRENT_USER;")
+        result = conn.execute(sql).all()
+        print("Hello, ", result[0][0])
