@@ -3,21 +3,23 @@ from sqlalchemy.engine.url import URL  # Import URL from the engine submodule
 from sqlalchemy import text
 
 
-def connect_db(drivername, host, database, query):
+def connect_remote(drivername, username, password, host, port, database, query):
     """
     pass
     """
     try:
         url = URL.create(drivername=drivername,
-                        host=host,
-                        database=database,
-                        query=query)
-
-
+                         username=username,
+                         password=password,
+                         host=host,
+                         port=port,
+                         database=database,
+                         query=query)
         engine = create_engine(url)
         return engine
     except:
         raise ValueError("Engine object could not be created")
+
 
 def display_info(engine):
     """
@@ -26,4 +28,7 @@ def display_info(engine):
     with engine.connect() as conn:
         sql = text("SELECT CURRENT_USER;")
         result = conn.execute(sql).all()
-        print("Hello, ", result[0][0])
+        if result:
+            return str(result[0][0])
+        else:
+            return None
